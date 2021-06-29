@@ -8,6 +8,9 @@ public class SyntaxTypes {
         //  the user to enter a username). if the username has already
         //  been used by user1, user2, or user3, print "sorry this
         //  username already exists.
-        String username1 = "Sam Bowcut";
+
+
+
+
     }
 }
