@@ -8,7 +8,10 @@ class Red {
 }
 
 class Orange extends Red{
-    @Override
+    @Override // comments for the compiler // it checks to see if that comment is doing
+    // what it's supposed to
+
+    // hey this method should be overriding the method in its parent class of red
     public void show(){
         System.out.println("I am Orange");
     }
