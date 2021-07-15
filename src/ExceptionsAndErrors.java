@@ -45,7 +45,7 @@ public class ExceptionsAndErrors {
         return false;
     }
 public double getDbl(double min, double max){
-        this.dbl = getDbl();
+//        this.dbl = getDbl();
 
         if (dbl < min) {
             System.out.println("Pick a number between " + min + " and " + max);
