@@ -10,6 +10,9 @@ public class FileIO {
     public static void main(String[] args) {
 //        System.out.println(getFilePath("Does the path exist?"));
 //        System.out.println(doesPathExist(getFilePath("src", "fileIO", "test.txt")));
+        init();
+    }
+    public static void init(){
         Path path = getFilePath("src", "fileIO", "files");
         tryCreateDirectory(path);
         path = Paths.get(path.toString(), "test.txt");
