@@ -10,14 +10,14 @@ public class ArraysExercises {
 
 
 
-        Person person = new Person("Haruko");
-        Person person2 = new Person("Naota");
-        Person person3 = new Person("Ninamori");
+        Person person = new Person("George");
+        Person person2 = new Person("Naomi");
+        Person person3 = new Person("Gwen");
 
         String[] personArray = {person.getName(), person2.getName(), person3.getName()};
         System.out.println(Arrays.toString(personArray));
 
-        String[] newArray = addPerson(personArray, "Canti");
+        String[] newArray = addPerson(personArray, "Charlie");
         System.out.println(Arrays.toString(newArray));
 
     }
@@ -33,8 +33,6 @@ public class ArraysExercises {
         person = Arrays.copyOf(person, person.length + 1);
 
         person[person.length - 1] = newPerson;
-
-//        System.out.println(Arrays.toString(person));
 
         return person;
 

@@ -1,112 +1,111 @@
 package util;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Input {
+    private Scanner scanner;
+    private int minInt;
+    private int maxInt;
+    private double minDouble;
+    private double maxDouble;
 
-    private final Scanner scanner = new Scanner(System.in);
+    public Input() {
+        createScanner();
+    }
 
-    public String getString(String soutValue) {
-        System.out.printf("\n%s: ", soutValue);
-        return scanner.next();
+    public void createScanner() {
+        this.scanner = new Scanner(System.in);
+    }
+
+    public String userInput() {
+        return scanner.nextLine();
     }
 
     public String getString() {
-        System.out.println("\nEnter a value: ");
-        return scanner.next();
+        return userInput();
+
     }
 
-    public boolean yesNo() {
-        boolean exit = false;
-        while (true) {
-            System.out.println("\nWould you like to continue? ");
-            String input = scanner.next();
-            if (input.matches("(?i)y|yes|yea|yeah|ya|yep")) {
-                exit = true;
-                break;
-            } else if (input.matches("(?i)n|no|nah|na|nope|notta")) {
-                "".isEmpty();
-                break;
-            } else {
-                System.out.println("\nNot a valid response...\n");
-            }
-        }
-        return exit;
-    }
-
-    public boolean yesNo(String soutValue) {
-        boolean exit = false;
-        while (true) {
-            System.out.printf("\n%s ", soutValue);
-            String input = "";
-            input = scanner.next();
-            if (input.matches("(?i)y|yes|yea|yeah|ya|yep")) {
-                exit = true;
-                break;
-            } else if (input.matches("(?i)n|no|nah|na|nope|notta")) {
-                "".isEmpty();
-                break;
-            } else {
-                System.out.println("\nNot a valid response...\n");
-            }
-        }
-        return exit;
-    }
-
-    public int getInt(int min, int max) {
-        System.out.printf("Enter a value between the range of %s and %s\n", min, max);
-        while (true) {
-            if (scanner.hasNextInt()) {
-                int intValue = scanner.nextInt();
-                if (intValue < min || intValue > max) {
-                    System.out.printf("\nThat number isn't between %s and %s..\n", min, max);
-                    scanner.nextLine();
-                } else {
-                    return intValue;
-                }
-            } else {
-                System.out.println("Please enter a valid number.. \n");
-                scanner.nextLine();
-            }
-        }
-    }
-
-    public int getInt() {
-        System.out.println("Enter choice: ");
-        if (scanner.hasNextInt()) {
-            return scanner.nextInt();
+    public boolean yesNo(String prompt) {
+        System.out.println(prompt);
+        String userInput = userInput();
+        if (userInput.toUpperCase().startsWith("Y")) {
+            return true;
         } else {
-            System.out.println("Please enter a valid number.. ");
+            return false;
+        }
+    }
+
+    public void setMinMaxInt(int min, int max) {
+        this.minInt = min;
+        this.maxInt = max;
+    }
+
+    public void setMinMaxDouble(double min, double max) {
+        this.minDouble = min;
+        this.maxDouble = max;
+    }
+
+    public int getInt() { //replaced parameter with private fields that can only be set calling the setters
+        int typedNumber = 0;
+        System.out.printf("Type a Number Between %s and %s\n", minInt, maxInt);
+
+        try {
+            typedNumber = Integer.parseInt(getString());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println(Arrays.toString(e.getStackTrace()));
+            throw new NumberFormatException("Not An Integer");
+        }
+
+//        typedNumber = Integer.parseInt(userInput());
+        if (typedNumber < minInt || typedNumber > maxInt) {
+            System.out.println("That is out of range");
             getInt();
-        }
-        return 0;
-    }
-
-    public double getDouble(double min, double max) {
-        System.out.printf("Enter a value between the range of %s and %s\n", min, max);
-        while (true) {
-            if (scanner.hasNextDouble()) {
-                double dubValue = scanner.nextDouble();
-                if (dubValue < min || dubValue > max) {
-                    System.out.println("That value is not within specs..");
-                } else {
-                    System.out.println("Number entered is acceptable.");
-                    break;
-                }
-            } else {
-                System.out.println("Please enter a valid number.. ");
-            }
-        }
-        return 0;
-    }
-
-    public double getDouble() {
-        System.out.println("Enter a number: ");
-        if (scanner.hasNextDouble()) {
-            return scanner.nextDouble();
         } else {
-            System.out.println("Please enter a valid number.. ");
-            return 0;
+            System.out.println("You Typed: " + typedNumber);
+            return typedNumber;
+        }
+        return typedNumber;
+    }
+
+    public int getInt(String prompt) {
+        System.out.println(prompt);
+        int typedNumber = 0;
+        try {
+            typedNumber = Integer.parseInt(getString());
+            System.out.println(typedNumber);
+        } catch (NumberFormatException e) {
+            System.out.println("Not Valid Input");
+        }
+        System.out.println("You Typed: " + typedNumber);
+        return typedNumber;
+    }
+
+    public void getDouble() {
+        System.out.printf("Type a Number Between %s and %s\n", minDouble, maxDouble);
+        double typedNumber;
+        try {
+            typedNumber = Double.parseDouble(getString());
+        } catch (NumberFormatException e) {
+            System.out.println(e.getMessage());
+            throw new NumberFormatException("Not a Valid Double");
+        }
+        if (typedNumber < minDouble || typedNumber > maxDouble) {
+            System.out.println("That is out of range");
+            getDouble();
+        } else {
+            System.out.println("You Typed: " + typedNumber);
         }
     }
+
+    public double getDouble(String prompt) {
+        System.out.println(prompt);
+        double typedNumber = Double.parseDouble(userInput());
+        System.out.println("You Typed: " + typedNumber);
+        return typedNumber;
+    }
+
+
 }
